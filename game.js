@@ -38,6 +38,7 @@ playerLiverscount.textContent = playerLives;
  
  
  //Skapar element
+ let cards = document.querySelectorAll('.card');
  cardData.forEach(item => {
      let card = document.createElement('div');
      let face = document.createElement('img');
@@ -47,11 +48,35 @@ playerLiverscount.textContent = playerLives;
      back.classList = 'back';
      //Koppla bilderna till korten
      face.src = item.imgSrc;
+     card.setAttribute('name', item.name);
      //Koppla korten till sectionen
      section.appendChild(card);
      card.appendChild(face);
      card.appendChild(back);
+
+     card.addEventListener('click', (e) => {
+         card.classList.toggle('toggleCard');
+         checkCards(e);
+     })
     });
+};
+
+
+//Kontrollerar korten
+let checkCards = (e) => {
+    let clickedCard = e.target;
+    clickedCard.classList.add("flipped");
+    let flippedCards = document.querySelectorAll('.flipped')
+    if(flippedCards.length === 2) {
+        if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) 
+    {
+        console.log("match")
+      
+    } else {
+        console.log("wrong")
+    }
+}
+
 };
 cardGenerator();
   
