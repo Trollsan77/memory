@@ -1,9 +1,4 @@
 const section = document.querySelector('section');
-const playerLiverscount = document.querySelector('span');
-const playerLives = 6;
-
-//Länkar texten
-playerLiverscount.textContent = playerLives;
 
 //Skapar korten
   const getData = () => [
@@ -20,7 +15,7 @@ playerLiverscount.textContent = playerLives;
       { imgSrc: "./img/fkatwigs.jpeg", name: "fka twigs" },
       { imgSrc: "./img/fleetwood.jpeg", name: "fleetwood" },
       { imgSrc: "./img/joy-division.jpeg", name: "joy division" },
-      { imgSrc: "./img/ledzep.jpeg", name: "led zeppelin" },
+      { imgSrc: "./img/ledzep.jpeg", name: "lep zeppelin" },
       { imgSrc: "./img/metallica.jpeg", name: "metallica" },
       { imgSrc: "./img/pinkfloyd.jpeg", name: "pink floyd" },
     ];
@@ -66,16 +61,40 @@ playerLiverscount.textContent = playerLives;
 let checkCards = (e) => {
     let clickedCard = e.target;
     clickedCard.classList.add("flipped");
-    let flippedCards = document.querySelectorAll('.flipped')
+    let flippedCards = document.querySelectorAll('.flipped');
+    let toggleCard = document.querySelectorAll('.toggleCard');
     if(flippedCards.length === 2) {
-        if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) 
-    {
-        console.log("match")
-      
+        if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) {
+        console.log("rätt");
+        flippedCards.forEach((card) => {
+            card.classList.remove("flipped");
+            card.style.pointerEvents = "none";
+        });
     } else {
-        console.log("wrong")
-    }
+        console.log("fel");
+        flippedCards.forEach((card )=> {
+            card.classList.remove("flipped");
+            setTimeout(() => card.classList.remove("toggleCard"), 1000);
+        });
+        }
 }
+};
+//restart
+const restart = (text) => {
+let cardData = randomize();
+let faces = document.querySelectorAll('.face');
+let cards = document.querySelectorAll('.card');
+section.style.pointerEvents = 'none';
+
+setTimeout(() => {
+cardData.forEach((item, index) => {
+    cards[index].classList.remove('toggleCard');
+    cards[index].style.pointerEvents = 'all';
+    faces[index].src = item.imgSrc;
+    cards[index].setAttribute('name', item.name);
+    section.style.pointerEvents = 'all';
+}, 1000)
+});
 
 };
 cardGenerator();
