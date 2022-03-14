@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
   cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"sv","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"Memory"});
   });
 
-
-
 let count = 0;
 let firstSelection = '';
 let secondSelection = '';
+let previousTarget = null;
 let restart = document.querySelector('.restart')
 let cards = document.createElement('article');
 let resultDisplay = document.querySelector('#resultat')
@@ -81,7 +80,7 @@ function cardMatch(){
   let selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
     card.classList.add('match');
-  });
+    });
 }
  let resetSelected = () => {
   moves.push(1);
@@ -103,8 +102,9 @@ cards.addEventListener('click', (e) => {
   //Blockerar så man inte kan klicka på redan vald
   if (
     clicked.nodeName === 'ARTICLE' ||
+    clicked === previousTarget ||
     clicked.parentNode.classList.contains('selected') ||
-    clicked.parentNode.classList.contains('match')
+    clicked.parentNode.classList.contains('match') 
   ) {
     return;
   }
@@ -123,6 +123,7 @@ cards.addEventListener('click', (e) => {
       }
       setTimeout(resetSelected, 1000);
     }
+  previousTarget = clicked;
   }
 });
 let restartButton = restart; 
