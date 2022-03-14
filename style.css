@@ -2,6 +2,7 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
+  max-width: 1000px;
 }
 
 html body {
@@ -9,8 +10,8 @@ html body {
   background: #fdfcfa;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
-      grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+  -ms-grid-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+      grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
   grid-auto-rows: auto 50px;
 }
 
@@ -70,6 +71,7 @@ html body header section {
   font-size: 24px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #5a5751;
+  margin: 0px;
 }
 
 html body header section .restart {
@@ -157,8 +159,23 @@ html body section .match .front {
 }
 
 html footer {
-  -ms-grid-row: 16;
+  -ms-grid-row: 17;
   -ms-grid-row-span: 1;
-  grid-row: 16 / 17;
+  grid-row: 17 / 18;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 8;
+  grid-column: 1 / 9;
+  background-color: #5a5751;
+}
+
+html footer a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #fdfcfa;
+  text-decoration: none;
 }
 /*# sourceMappingURL=style.css.map */

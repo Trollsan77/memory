@@ -1,6 +1,6 @@
 // cookiebar
 document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"sv","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"website_name":"Velox Freerun","website_privacy_policy_url":"https://trollsan77.github.io/veloxfreerun/contact.html"});
+  cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"sv","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"Memory"});
   });
 
 
