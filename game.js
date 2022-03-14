@@ -1,103 +1,142 @@
-const section = document.querySelector('section');
+// cookiebar
+document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"light","language":"sv","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"website_name":"Velox Freerun","website_privacy_policy_url":"https://trollsan77.github.io/veloxfreerun/contact.html"});
+  });
 
-//Skapar korten
-  const getData = () => [
-      { imgSrc: "./img/beatles.jpeg", name: "beatles" },
-      { imgSrc: "./img/blink182.jpeg", name: "blink 182" },
-      { imgSrc: "./img/fkatwigs.jpeg", name: "fka twigs" },
-      { imgSrc: "./img/fleetwood.jpeg", name: "fleetwood" },
-      { imgSrc: "./img/joy-division.jpeg", name: "joy division" },
-      { imgSrc: "./img/ledzep.jpeg", name: "lep zeppelin" },
-      { imgSrc: "./img/metallica.jpeg", name: "metallica" },
-      { imgSrc: "./img/pinkfloyd.jpeg", name: "pink floyd" },
-      { imgSrc: "./img/beatles.jpeg", name: "beatles" },
-      { imgSrc: "./img/blink182.jpeg", name: "blink 182" },
-      { imgSrc: "./img/fkatwigs.jpeg", name: "fka twigs" },
-      { imgSrc: "./img/fleetwood.jpeg", name: "fleetwood" },
-      { imgSrc: "./img/joy-division.jpeg", name: "joy division" },
-      { imgSrc: "./img/ledzep.jpeg", name: "lep zeppelin" },
-      { imgSrc: "./img/metallica.jpeg", name: "metallica" },
-      { imgSrc: "./img/pinkfloyd.jpeg", name: "pink floyd" },
-    ];
-  
-// Randomize
-    const randomize = () => {
-        const cardData = getData();
-        cardData.sort(() => Math.random() - 0.5);
-        return cardData;
+
+
+let count = 0;
+let firstSelection = '';
+let secondSelection = '';
+let restart = document.querySelector('.restart')
+let cards = document.createElement('article');
+let resultDisplay = document.querySelector('#resultat')
+let movesDisplay =document.querySelector('#moves')
+const cardsArray = [
+  {img: 'img/char-01.png',name: 'ninja',},
+  {img: 'img/char-02.png',name: 'musiker',},
+  {img: 'img/char-03.png',name: 'professor',},
+  {img: 'img/char-04.png',name: 'läkare',},
+  {img: 'img/char-05.png',name: 'bagare',},
+  {img: 'img/char-06.png',name: 'tränare',},
+  {img: 'img/char-07.png',name: 'fe',},
+  {img: 'img/char-08.png',name: 'fotograf',},
+  {img: 'img/char-09.png',name: 'dykare',},
+  {img: 'img/char-10.png',name: 'clown',},
+  {img: 'img/char-11.png',name: 'astronaut',},
+  {img: 'img/char-12.png',name: 'polis',},
+];
+let game = generateGame();
+let cardsWon = []
+let moves = []
+generateGame();
+
+function generateGame(){
+ //Dubblerar Arrey 
+  for(let i=0; i < 1; i++){
+        
+    let gameCards = cardsArray
+    gameCards.sort(() => 0.5 - Math.random());
+        
+    //Skapar spelplanen
+    let game = document.getElementById('game');
+    cards.setAttribute('class', 'cards');
+    game.appendChild(cards);
+
+      //Skapar korten
+    gameCards.forEach(item => {
+      let { name, img,} = item;
+      let card = document.createElement('div');
+      let front = document.createElement('img');
+      let back = document.createElement('img');
+      card.dataset.name = name
+      card.setAttribute('name', item.name);
     
-    };
- // Generera kort
-    const cardGenerator = () => {
-    const cardData = randomize();
- 
- 
- //Skapar element
- let cards = document.querySelectorAll('.card');
- cardData.forEach(item => {
-     let card = document.createElement('div');
-     let face = document.createElement('img');
-     let back = document.createElement('div');
-     card.classList = 'card';
-     face.classList = 'face';
-     back.classList = 'back';
-     //Koppla bilderna till korten
-     face.src = item.imgSrc;
-     card.setAttribute('name', item.name);
-     //Koppla korten till sectionen
-     section.appendChild(card);
-     card.appendChild(face);
-     card.appendChild(back);
+      // Lägger till classer
+      card.classList.add('card');
+      front.classList.add('front');
+      back.classList.add('back');
+      
+      //Koppla bilderna till korten
+      back.style.backgroundImage = `url(${img})`;
+      front.style.backgroundImage = `url(img/card.png)`;
+      back.alt = '';
+      front.alt = '';
 
-     card.addEventListener('click', (e) => {
-         card.classList.toggle('toggleCard');
-         checkCards(e);
-     })
-    });
-};
+      //Koppla korten till sectionen
+      cards.appendChild(card);
+      card.appendChild(front);
+      card.appendChild(back);
+    }
 
-
-//Kontrollerar korten
-let checkCards = (e) => {
-    let clickedCard = e.target;
-    clickedCard.classList.add("flipped");
-    let flippedCards = document.querySelectorAll('.flipped');
-    let toggleCard = document.querySelectorAll('.toggleCard');
-    if(flippedCards.length === 2) {
-        if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) {
-        console.log("rätt");
-        flippedCards.forEach((card) => {
-            card.classList.remove("flipped");
-            card.style.pointerEvents = "none";
-        });
-    } else {
-        console.log("fel");
-        flippedCards.forEach((card )=> {
-            card.classList.remove("flipped");
-            setTimeout(() => card.classList.remove("toggleCard"), 1000);
-        });
-        }
+    )} 
 }
-};
-//restart
-const restart = (text) => {
-let cardData = randomize();
-let faces = document.querySelectorAll('.face');
-let cards = document.querySelectorAll('.card');
-section.style.pointerEvents = 'none';
-
-setTimeout(() => {
-cardData.forEach((item, index) => {
-    cards[index].classList.remove('toggleCard');
-    cards[index].style.pointerEvents = 'all';
-    faces[index].src = item.imgSrc;
-    cards[index].setAttribute('name', item.name);
-    section.style.pointerEvents = 'all';
-}, 1000)
-});
-
-};
-cardGenerator();
+function cardMatch(){
+  cardsWon.push(1);
+  resultDisplay.textContent = cardsWon.length
+  if  (cardsWon.length === cardsArray.length) {
+    resultDisplay.textContent = ' Grattis, du hittade alla'
+    restart.style.visibility = "visible";
+  }
+  let selected = document.querySelectorAll('.selected');
+  selected.forEach(card => {
+    card.classList.add('match');
+  });
+}
+ let resetSelected = () => {
+  moves.push(1);
+  movesDisplay.textContent = moves.length
   
- 
- 
+  firstSelection = '';
+  secondSelection = '';
+  count = 0;
+
+ let selected = document.querySelectorAll('.selected');
+  selected.forEach(card => {
+    card.classList.remove('selected');
+    
+});
+};
+cards.addEventListener('click', (e) => {
+  let clicked = (e).target;
+  
+  //Blockerar så man inte kan klicka på redan vald
+  if (
+    clicked.nodeName === 'ARTICLE' ||
+    clicked.parentNode.classList.contains('selected') ||
+    clicked.parentNode.classList.contains('match')
+  ) {
+    return;
+  }
+  if (count < 2) {
+    count++;
+    if (count === 1) {
+      firstSelection = clicked.parentNode.dataset.name;
+      clicked.parentNode.classList.add('selected');
+    } else {
+      secondSelection = clicked.parentNode.dataset.name;
+      clicked.parentNode.classList.add('selected');
+    }
+    if (firstSelection && secondSelection) {
+      if (firstSelection === secondSelection) {
+        setTimeout(cardMatch(), 1000);
+      }
+      setTimeout(resetSelected, 1000);
+    }
+  }
+});
+let restartButton = restart; 
+restartButton.addEventListener("click", restartGame); 
+
+function restartGame(){
+ location.reload(); 
+}
+
+
+
+
+
+
+
+
+
