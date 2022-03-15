@@ -22,7 +22,6 @@ html body header {
   -ms-grid-row: 1;
   -ms-grid-row-span: 3;
   grid-row: 1 / 4;
-  background-image: url("img/card2.png");
 }
 
 html body header h1 {
@@ -44,9 +43,10 @@ html body header h1 {
   grid-row: 1 / 2;
   font-size: 72px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  text-shadow: 5px 0 #5a5751;
+  text-shadow: 5px 0 black;
   color: #c49594;
   margin: 0px;
+  background-image: url("img/card2.png");
 }
 
 html body header section {
@@ -71,12 +71,12 @@ html body header section {
   grid-column: 2 / 8;
   font-size: 24px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #5a5751;
+  color: black;
   margin: 0px;
 }
 
 html body header section .restart {
-  background-color: #5a5751;
+  background-color: black;
   font-size: 18px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fdfcfa;
@@ -132,7 +132,7 @@ html body section .front {
 html body section .back {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-  background-color: #5a5751;
+  background-color: black;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -143,8 +143,7 @@ html body section .back {
 
 html body section .card,
 html body section .front,
-html body section .back,
-html body section .match {
+html body section .back {
   height: 100px;
   width: 100px;
 }
@@ -155,7 +154,7 @@ html body section .selected {
 }
 
 html body section .match {
-  background: #5a5751;
+  background: black;
   visibility: hidden;
 }
 
@@ -170,14 +169,15 @@ html body footer {
 }
 
 html body footer a {
-  -ms-grid-row: 18;
-  grid-row: 18 / 18;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: black;
   text-decoration: none;
   font-size: 18px;

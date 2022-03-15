@@ -28,6 +28,8 @@ const cardsArray = [
 let game = generateGame();
 let cardsWon = []
 let moves = []
+
+
 generateGame();
 
 function generateGame(){
@@ -50,11 +52,14 @@ function generateGame(){
       let back = document.createElement('img');
       card.dataset.name = name
       card.setAttribute('name', item.name);
+      
     
       // Lägger till classer
       card.classList.add('card');
       front.classList.add('front');
       back.classList.add('back');
+      card.tabIndex = 0;
+     
       
       //Koppla bilderna till korten
       back.style.backgroundImage = `url(${img})`;
@@ -67,10 +72,9 @@ function generateGame(){
       card.appendChild(front);
       card.appendChild(back);
     }
-
     )} 
 }
-function cardMatch(){
+let cardMatch = () => {
   cardsWon.push(1);
   resultDisplay.textContent = cardsWon.length
   if  (cardsWon.length === cardsArray.length) {
@@ -82,7 +86,7 @@ function cardMatch(){
     card.classList.add('match');
     });
 }
- let resetSelected = () => {
+let resetSelected = () => {
   moves.push(1);
   movesDisplay.textContent = moves.length
   
@@ -96,9 +100,10 @@ function cardMatch(){
     
 });
 };
-cards.addEventListener('click', (e) => {
+
+cards.addEventListener('click', clickedCard);  
+function clickedCard (e){
   let clicked = (e).target;
-  
   //Blockerar så man inte kan klicka på redan vald
   if (
     clicked.nodeName === 'ARTICLE' ||
@@ -125,11 +130,10 @@ cards.addEventListener('click', (e) => {
     }
   previousTarget = clicked;
   }
-});
+};
 let restartButton = restart; 
 restartButton.addEventListener("click", restartGame); 
-
-function restartGame(){
+let restartGame = () => {
  location.reload(); 
 }
 
