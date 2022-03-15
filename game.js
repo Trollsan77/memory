@@ -100,8 +100,6 @@ let resetSelected = () => {
     
 });
 };
-
-cards.addEventListener('click', clickedCard);  
 function clickedCard (e){
   let clicked = (e).target;
   //Blockerar så man inte kan klicka på redan vald
@@ -131,12 +129,17 @@ function clickedCard (e){
   previousTarget = clicked;
   }
 };
-let restartButton = restart; 
-restartButton.addEventListener("click", restartGame); 
+cards.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter'){
+    clickedCard(e);
+  }
+} )
+cards.addEventListener('click', clickedCard);  
 let restartGame = () => {
  location.reload(); 
 }
-
+let restartButton = restart; 
+restartButton.addEventListener("click", restartGame); 
 
 
 
