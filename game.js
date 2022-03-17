@@ -24,17 +24,27 @@ const cardsArray = [
   {img: 'img/char-10.png',name: 'clown',},
   {img: 'img/char-11.png',name: 'astronaut',},
   {img: 'img/char-12.png',name: 'polis',},
+  {img: 'img/char-01.png',name: 'ninja',},
+  {img: 'img/char-02.png',name: 'musiker',},
+  {img: 'img/char-03.png',name: 'professor',},
+  {img: 'img/char-04.png',name: 'läkare',},
+  {img: 'img/char-05.png',name: 'bagare',},
+  {img: 'img/char-06.png',name: 'tränare',},
+  {img: 'img/char-07.png',name: 'fe',},
+  {img: 'img/char-08.png',name: 'fotograf',},
+  {img: 'img/char-09.png',name: 'dykare',},
+  {img: 'img/char-10.png',name: 'clown',},
+  {img: 'img/char-11.png',name: 'astronaut',},
+  {img: 'img/char-12.png',name: 'polis',},
 ];
 let game = generateGame();
 let cardsWon = []
 let moves = []
 
 
-generateGame();
-
 function generateGame(){
- //Dubblerar Arrey 
-  for(let i=0; i < 1; i++){
+
+  for(let i = 0; i < Array.length; i++) {
         
     let gameCards = cardsArray
     gameCards.sort(() => 0.5 - Math.random());
@@ -45,21 +55,25 @@ function generateGame(){
     game.appendChild(cards);
 
       //Skapar korten
-    gameCards.forEach(item => {
-      let { name, img,} = item;
-      let card = document.createElement('div');
+    gameCards.forEach((item, i) => {
+      item.id = i + 1;
+      let { name, img, } = item;
+      let card = document.createElement('figure');
       let front = document.createElement('img');
       let back = document.createElement('img');
       card.dataset.name = name
-      card.setAttribute('name', item.name);
+      card.setAttribute('data-id', i)
+      card.setAttribute("tabindex", "0");
+
       
     
       // Lägger till classer
       card.classList.add('card');
       front.classList.add('front');
       back.classList.add('back');
-      card.tabIndex = 0;
-     
+
+      card.addEventListener('click', clickedCard); 
+      card.addEventListener('keydown', keyBoardClick);
       
       //Koppla bilderna till korten
       back.style.backgroundImage = `url(${img})`;
@@ -74,6 +88,29 @@ function generateGame(){
     }
     )} 
 }
+function keyBoardClick (e) {
+  let keyBoard = document.querySelector('.card');
+ 
+  switch(e.key){
+    case 'ArrowDown':
+      console.log('ArrowDown');
+      break;
+    case 'ArrowUp':
+      console.log('ArrowUp');
+      break;
+    case 'ArrowLeft':
+      console.log('ArrowLeft');
+      break;
+    case 'ArrowRight':
+    console.log('ArrowRight');
+    break;
+  default:
+    console.log(e.key, e.keyCode, e.location);
+    return;
+  }
+  e.preventDefault();
+}
+
 let cardMatch = () => {
   cardsWon.push(1);
   resultDisplay.textContent = cardsWon.length
@@ -100,7 +137,7 @@ let resetSelected = () => {
     
 });
 };
-function clickedCard (e){
+function clickedCard(e){
   let clicked = (e).target;
   //Blockerar så man inte kan klicka på redan vald
   if (
@@ -129,22 +166,11 @@ function clickedCard (e){
   previousTarget = clicked;
   }
 };
-cards.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter'){
-    clickedCard(e);
-  }
-} )
-cards.addEventListener('click', clickedCard);  
+ 
 let restartGame = () => {
  location.reload(); 
 }
 let restartButton = restart; 
 restartButton.addEventListener("click", restartGame); 
-
-
-
-
-
-
 
 

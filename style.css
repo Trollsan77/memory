@@ -112,13 +112,17 @@ html body section .cards {
 
 html body section .card {
   position: relative;
-  -webkit-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   margin: 7px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
           box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+}
+
+html body section .card:focus {
+  outline: 5px solid #fdfcfa;
 }
 
 html body section .front {
@@ -169,12 +173,12 @@ html body footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 html body footer a {
