@@ -8,7 +8,7 @@ let firstSelection = '';
 let secondSelection = '';
 let previousTarget = null;
 let restart = document.querySelector('.restart')
-let cards = document.createElement('article');
+let grid = document.createElement('article');
 let resultDisplay = document.querySelector('#resultat')
 let movesDisplay =document.querySelector('#moves')
 const cardsArray = [
@@ -44,15 +44,16 @@ let moves = []
 
 function generateGame(){
 
-  for(let i = 0; i < Array.length; i++) {
+  for(let i = 0; i < 1; i++) {
         
     let gameCards = cardsArray
     gameCards.sort(() => 0.5 - Math.random());
         
     //Skapar spelplanen
     let game = document.getElementById('game');
-    cards.setAttribute('class', 'cards');
-    game.appendChild(cards);
+    grid.setAttribute('class', 'grid');
+    grid.setAttribute('role', 'row')
+    game.appendChild(grid);
 
       //Skapar korten
     gameCards.forEach((item, i) => {
@@ -64,6 +65,7 @@ function generateGame(){
       card.dataset.name = name
       card.setAttribute('data-id', i)
       card.setAttribute("tabindex", "0");
+      card.setAttribute('role', 'gridcell')
 
       
     
@@ -73,7 +75,6 @@ function generateGame(){
       back.classList.add('back');
 
       card.addEventListener('click', clickedCard); 
-      card.addEventListener('keydown', keyBoardClick);
       
       //Koppla bilderna till korten
       back.style.backgroundImage = `url(${img})`;
@@ -82,40 +83,18 @@ function generateGame(){
       front.alt = '';
 
       //Koppla korten till sectionen
-      cards.appendChild(card);
+      grid.appendChild(card);
       card.appendChild(front);
       card.appendChild(back);
     }
     )} 
 }
-function keyBoardClick (e) {
-  let keyBoard = document.querySelector('.card');
- 
-  switch(e.key){
-    case 'ArrowDown':
-      console.log('ArrowDown');
-      break;
-    case 'ArrowUp':
-      console.log('ArrowUp');
-      break;
-    case 'ArrowLeft':
-      console.log('ArrowLeft');
-      break;
-    case 'ArrowRight':
-    console.log('ArrowRight');
-    break;
-  default:
-    console.log(e.key, e.keyCode, e.location);
-    return;
-  }
-  e.preventDefault();
-}
-
 let cardMatch = () => {
   cardsWon.push(1);
-  resultDisplay.textContent = cardsWon.length
-  if  (cardsWon.length === cardsArray.length) {
-    resultDisplay.textContent = ' Grattis, du hittade alla'
+    resultDisplay.textContent = cardsWon.length
+  if  (cardsWon.length === cardsArray.length/8) {
+    resultDisplay.textContent = ' Alla '
+    setTimeout(alert(' Grattis, du hittade alla '), 1000);
     restart.style.visibility = "visible";
   }
   let selected = document.querySelectorAll('.selected');
@@ -166,7 +145,6 @@ function clickedCard(e){
   previousTarget = clicked;
   }
 };
- 
 let restartGame = () => {
  location.reload(); 
 }
