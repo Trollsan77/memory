@@ -92,7 +92,7 @@ function generateGame(){
 let cardMatch = () => {
   cardsWon.push(1);
     resultDisplay.textContent = cardsWon.length
-  if  (cardsWon.length === cardsArray.length/8) {
+  if  (cardsWon.length === cardsArray.length/2) {
     resultDisplay.textContent = ' Alla '
     setTimeout(alert(' Grattis, du hittade alla '), 1000);
     restart.style.visibility = "visible";
